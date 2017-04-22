@@ -30,7 +30,7 @@ bind "ACTION_BUTTON", to: :action_for_button
 ```
 
 **Note**: multiple commands may be matched from a single message, in that case commands
-will be executed in order of matching.  
+will be executed in order of matching.
 
 "Talking" to the connected user is as straightforward as it gets:
 
@@ -97,9 +97,9 @@ end
 
 **Rubotnik** does not depend on any database out of the box and runs on Rack, so it functions as a **self-contained web app** (primed for [Heroku](https://heroku.com)). It can work with your main project through the REST API and use its database for persistence. The default server is Puma, but you can use any other Rack webserver for production or development (note that in-memory user store  does not support parallelism through processes and a Puma server can only run with **one "worker"**, multiple *threads* are fine).
 
-[Sinatra](http://www.sinatrarb.com/) is enabled inside the boilerplate by default, and you can use its familiar syntax to define new webhooks for incoming API calls.  
+[Sinatra](http://www.sinatrarb.com/) is enabled inside the boilerplate by default, and you can use its familiar syntax to define new webhooks for incoming API calls.
 
-A built-in set of convenience classes makes working with Messenger Platform less tedious (you don't need to hardcode huge nested JSONs/hashes anymore to use basic interface features, just call one of the builder classes inside **UI** module).  
+A built-in set of convenience classes makes working with Messenger Platform less tedious (you don't need to hardcode huge nested JSONs/hashes anymore to use basic interface features, just call one of the builder classes inside **UI** module).
 
 _**DISCLAIMER:** I am a new programmer and a recent [Le Wagon](https://www.lewagon.com/) graduate, passionate about all things Ruby. This is my first attempt at framework design and OSS. I welcome any discussion that can either push this project forward (and turn it into a separate gem), or prove its worthlessness. Please, star this repo if you want me to carry on._
 
@@ -139,10 +139,10 @@ Now open the boilerplate in your favorite text editor and let's take a look at t
 │   └── puma.rb # a configuration file for Puma
 ├── config.ru
 ├── demo # Constants for UI elements used in the demo.
-         # you are free to delete this folder  
+         # you are free to delete this folder
 │   └── sample_elements.rb
 ├── helpers # general helpers mixed into bot.rb
-            # and accessible from everywhere inside the boilerplate   
+            # and accessible from everywhere inside the boilerplate
 │   └── helpers.rb
 ├── privacy_policy.pdf  # replace with your own for FB approval
 ├── rubotnik # an embryo for the framework
@@ -215,7 +215,7 @@ Now that your bot is running on your machine, we need to connect it to the Messe
 
 ![webhook setup](./docs/webhook_setup.png)
 
-> :tada: Congrats! Your bot is connected to Facebook! You can start working on it.  
+> :tada: Congrats! Your bot is connected to Facebook! You can start working on it.
 
 # Working with Boilerplate
 
@@ -238,7 +238,7 @@ Messages and postbacks (referenced inside the common namespace as `@message` and
 
 **Persistent menu** (note it supports nesting) can be defined inside `rubotnik/persistent_menu.rb`.
 
-Follow the logic of the provided examples, you can also refer to Facebook documentation (just note that all the examples there are raw JSONs as the API accepts them, some parts of them have already been abstracted out on facebook-messenger gem level).  
+Follow the logic of the provided examples, you can also refer to Facebook documentation (just note that all the examples there are raw JSONs as the API accepts them, some parts of them have already been abstracted out on facebook-messenger gem level).
 
 The most important thing in `bot.rb` happens inside of blocks fed to `Bot.on :messages` and `Bot.on :postbacks` method calls.
 
@@ -250,7 +250,7 @@ Routing DSL is used inside blocks passed to `Rubotnik::MessageDispatch.new(messa
 
 Inside `helpers/helpers.rb` there are some pre-defined helper methods (you can write your own!) that are made available globally by mixing in the module into the `bot.rb` namespace.
 
-**Most important of them** is `say` that lets you send a plain message to a connected user. It defaults to  `@user` instance variable that is set automatically for you on each message or postback received, but you can pass an optional `user:` argument to send something to a different user.  
+**Most important of them** is `say` that lets you send a plain message to a connected user. It defaults to  `@user` instance variable that is set automatically for you on each message or postback received, but you can pass an optional `user:` argument to send something to a different user.
 
 The syntax is straightforward:
 
@@ -285,8 +285,8 @@ There are two ways to catch user's selection of a quick reply later in the progr
 `get_user_info(*fields)` takes a list of fields good for [Graph API User](https://developers.facebook.com/docs/graph-api/reference/v2.2/user) and makes a call to the Graph referencing connected user's id and requesting specified fields. Returns a hash with user data. Keys are symbols.
 
 ```ruby
-get_user_info(:first_name, :last_name) # => { first_name: "John", last_name: "Doe" }  
-```   
+get_user_info(:first_name, :last_name) # => { first_name: "John", last_name: "Doe" }
+```
 
 ---
 
@@ -301,7 +301,7 @@ get_user_info(:first_name, :last_name) # => { first_name: "John", last_name: "Do
 ```ruby
 bind "word", "synonym", to: :command_name
 # a method command_name should be found inside Commands module
-# or any other module mixed into it.   
+# or any other module mixed into it.
 ```
 
 Note that you reference a method to execute (we call it **'command'** in this README) by providing its name **as a symbol**
@@ -374,9 +374,9 @@ Rubotnik::PostbackDispatch.new(postback).route do
     say 'Here are some suggestions for you:', quick_replies: HINTS
   end
 
-```  
+```
 
-### Setting default response  
+### Setting default response
 
 You don't want to leave your user's messages unanswered. It's not polite and makes a bad user experience. You can set a default behavior to be applied to any message that did not trigger any reactions defined with `bind`. That way you can nudge your user towards available interaction scenarios. Use the `default` call inside your message routing block that takes its own block.
 
@@ -390,7 +390,7 @@ Rubotnik::MessageDispatch.new(message).route do
 end
 ```
 
-**Note**: `default` block should always come last, just before the closing `end` of your routing block.  
+**Note**: `default` block should always come last, just before the closing `end` of your routing block.
 
 ## Threads
 
@@ -599,7 +599,7 @@ Now don't forget to go back to your Facebook developer console and change the ad
 
 Most of all, I'll appreciate any help with turning **Rubotnik** into a proper gem with generators for new projects and **other grown-up things**.
 
-You're welcome to fork the project and create a PR or you can just email me and I'll add you as collaborator.  
+You're welcome to fork the project and create a PR or you can just email me and I'll add you as collaborator.
 
 ---
 
