@@ -1,0 +1,28 @@
+title Tablet Enabled NBD - NFC Payment
+
+user->tablet: hello! sell me some good brew!
+tablet->user: display menu
+user->tablet: select product
+tablet->user: confirm selection
+tablet->user: prompt for payment/NFC
+user->machine: swipe key fob
+machine->webhook: publish key id
+webhook->NK: fob_key, machine_id
+NK->NK: verify location matches
+NK->NK: charge customer's card using customer_id(fob key)
+NK->machine: enable machine for pour
+
+
+
+title Tablet Enabled NBD - Stripe Payment
+
+user->tablet: register
+tablet->user: display menu
+user->tablet: select product
+tablet->user: confirm selection
+tablet->user: prompt for payment/NFC
+user->machine: tap phone for android/apple pay
+machine->webhook: publish payment completed
+webhook->NK: payment completed, machine_id
+NK->NK: verify location matches
+NK->machine: enable machine for pour
